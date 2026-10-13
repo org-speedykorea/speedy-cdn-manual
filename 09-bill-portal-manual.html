@@ -818,8 +818,8 @@ code{font-family:'Fira Code',monospace;background:#f1f3f6;color:#cf222e;padding:
 <div class="param-heading">제공 범위</div><table class="param-tbl">
   <tr><th>항목</th><th>설명</th></tr>
   <tr><td>조회 대상</td><td>SPEEDY 에서 과금이 확정된 <strong>지난 월</strong> 데이터만 제공</td></tr>
-  <tr><td>내용</td><td>청구 금액, 공급가액·세액, 상품별 청구 내역</td></tr>
-  <tr><td>다운로드</td><td>청구 내역서는 PDF 파일로 다운로드 제공</td></tr>
+  <tr><td>내용</td><td>청구 금액(부가가치세 포함), 서비스별 청구 내역(서비스명·과금방식·약정·사용용량·과금용량·단가·청구금액, 부가가치세 미포함), 합계 금액, 입금정보·문의처</td></tr>
+  <tr><td>다운로드</td><td><strong>내역서 다운로드</strong> 버튼으로 청구 내역서 PDF 다운로드</td></tr>
 </table>
   </div>
   <div class="api-right">
@@ -882,7 +882,9 @@ code{font-family:'Fira Code',monospace;background:#f1f3f6;color:#cf222e;padding:
   <tr><th>항목</th><th>설명</th></tr>
   <tr><td>대상</td><td>SPEEDY 스토리지 서비스를 이용하는 경우에만 데이터 제공</td></tr>
   <tr><td>내용</td><td>스토리지 사용량 추이 그래프</td></tr>
-  <tr><td>조회 조건</td><td>고객명 / 도메인 / 조회 날짜 — 캐시 통계와 동일</td></tr>
+  <tr><td>조회 조건</td><td>고객명 / 도메인 (최근 2개월 내 스토리지 사용량이 있는 도메인만 표시)</td></tr>
+  <tr><td>구분</td><td>고객 단위 / 도메인 단위</td></tr>
+  <tr><td>조회 날짜</td><td>이번달 / 지난달 / 직접 기간 선택</td></tr>
 </table>
   </div>
   <div class="api-right">
@@ -923,8 +925,9 @@ code{font-family:'Fira Code',monospace;background:#f1f3f6;color:#cf222e;padding:
     <p class="api-desc">퍼지를 실행한 결과에 대한 내역을 확인할 수 있습니다.</p>
 <div class="param-heading">조회 항목</div><table class="param-tbl">
   <tr><th>항목</th><th>설명</th></tr>
-  <tr><td>조회 조건</td><td>고객명 / 도메인 / 조회 기간</td></tr>
-  <tr><td>목록</td><td>요청 일시, 도메인, 퍼지 방식, 퍼지 대상, 처리 결과(Success / Failed), Purge ID</td></tr>
+  <tr><td>조회 조건</td><td>고객명 / 도메인 / 검색 날짜 / 퍼지 대상(URL) — 퍼지 대상을 비워 두면 전체 결과 표시</td></tr>
+  <tr><td>목록</td><td>요청시간, 퍼지 방식, 퍼지 대상, CDN Service, 완료율, 완료시간, 완료상태, 퍼지 실행 계정</td></tr>
+  <tr><td>완료상태</td><td>complete(완료) / proceeding(진행 중) / error(오류)</td></tr>
 </table>
   </div>
   <div class="api-right">
@@ -1026,8 +1029,8 @@ code{font-family:'Fira Code',monospace;background:#f1f3f6;color:#cf222e;padding:
 <div class="param-heading">제공 범위</div><table class="param-tbl">
   <tr><th>항목</th><th>설명</th></tr>
   <tr><td>조회 대상</td><td>SPEEDY 에서 과금이 확정된 <strong>지난 월</strong> 데이터만 제공</td></tr>
-  <tr><td>내용</td><td>청구 금액, 공급가액·세액, 프로젝트·상품별 청구 내역</td></tr>
-  <tr><td>다운로드</td><td>청구 내역서는 PDF 파일로 다운로드 제공</td></tr>
+  <tr><td>내용</td><td>청구 금액(부가가치세 포함), Cloud 사용금액, 부가서비스(이용 시), 할인 금액, 합계 금액, 부가가치세, 입금정보·문의처</td></tr>
+  <tr><td>다운로드</td><td><strong>청구 내역서</strong>(PDF) · <strong>상세 자료</strong>(Excel) 2가지 — 프로젝트·상품별 내역은 상세 이용 내역 화면 또는 상세 자료에서 확인</td></tr>
 </table>
   </div>
   <div class="api-right">
@@ -1040,11 +1043,18 @@ code{font-family:'Fira Code',monospace;background:#f1f3f6;color:#cf222e;padding:
 <span id="settings-account" class="section-anchor"></span>
 <section class="full-section">
   <h1 class="fs-title">설정 · 계정</h1>
-  <p class="fs-desc">포털 로그인에 사용되는 계정을 수정하거나, 추가로 생성할 수 있습니다.</p>
+  <p class="fs-desc">포털 로그인에 사용되는 계정을 관리합니다. 계정의 <strong>계정 관리</strong> 권한에 따라 화면이 다릅니다.</p>
   <table class="feat-tbl">
-    <tr><th>기능</th><th>설명</th></tr>
-    <tr><td>계정 수정</td><td>로그인 중인 계정의 패스워드 등 정보 변경</td></tr>
-    <tr><td>계정 추가 생성</td><td>같은 고객사 내 다른 담당자용 로그인 계정 생성 (ID 는 이메일 형식)</td></tr>
+    <tr><th>계정 관리 권한</th><th>설명</th></tr>
+    <tr><td>write</td><td>같은 고객사의 계정 목록 전체 조회(아이디 또는 성명 검색), 계정 추가 · 수정 · 삭제</td></tr>
+    <tr><td>read</td><td>본인 계정 정보만 수정 (설정 &gt; 계정 클릭 시 바로 본인 정보 수정 화면으로 이동)</td></tr>
+    <tr><td>disable</td><td>설정 &gt; 계정 메뉴가 표시되지 않음</td></tr>
+  </table>
+  <table class="feat-tbl" style="margin-top:14px;">
+    <tr><th>항목</th><th>설명</th></tr>
+    <tr><td>계정 추가 · 수정 항목</td><td>활성화 / 비활성화, 아이디(E-Mail), 비밀번호, 이름, 고객 범위(전체 / 선택), 접근 권한, 메모</td></tr>
+    <tr><td>접근 권한</td><td>계정 관리 · CDN 통계 · 오리진 통계 · 스토리지 통계 · CDN 퍼지 · CDN 빌링 · Cloud 빌링 메뉴별로 write / read / disable 지정</td></tr>
+    <tr><td>비밀번호 규칙</td><td>8~50자, 사용할 수 없는 문자: <code>" ` ^ % + &amp; &lt; &gt; # |</code></td></tr>
   </table>
   <div class="ib" style="margin-top:18px;">계정 관련 문의 : <strong>speedy@speedykorea.com</strong></div>
 </section>
